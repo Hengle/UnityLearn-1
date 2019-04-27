@@ -3,10 +3,10 @@ using System.Text;
 using UnityEngine;
 using XLua;
 [Hotfix]
-public class LuaScript : MonoBehaviour
+public class LuaService : MonoBehaviour
 {
     private LuaEnv _luaEnv;
-    public static LuaScript Instance;
+    public static LuaService Instance;
 
     private void Start()
     {
