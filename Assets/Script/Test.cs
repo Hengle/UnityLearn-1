@@ -18,23 +18,39 @@ public class Test : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Start");
 
-
-        Dictionary<string, int> keyValuePairs = new Dictionary<string, int>();
-
-        var enumerator = keyValuePairs.GetEnumerator();
-        while (enumerator.MoveNext())
+        downloadButton.Clicked += async (o, e) =>
         {
-            var current = enumerator.Current;
-            Debug.Log(current.Key + "_" + current.Value);
-        }
+            // This line will yield control to the UI as the request
+            // from the web service is happening.
+            //
+            // The UI thread is now free to perform other work.
+            var stringData = await _httpClient.GetStringAsync(URL);
+            DoSomethingWithData(stringData);
+        };
     }
+    //https://docs.microsoft.com/en-us/dotnet/csharp/async#feedback
+    private readonly HttpClient _httpClient = new HttpClient();
 
 
-    // Update is called once per frame
-    void Update()
+
+
+// Update is called once per frame
+void Update()
     {
 
     }
+
+
+    public async void Func()
+    {
+      
+    }
+
+
+    IEnumerator enumerator()
+    {
+        yield return new WaitForSeconds(1);
+    }
+    
 }

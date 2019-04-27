@@ -6,4 +6,7 @@ public class AppBaseData : MonoBehaviour
 {
     public static readonly Environment environment = Environment.Dev;
 
+
+    public static readonly string PLATFORM;
+
 }
