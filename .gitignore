@@ -9,3 +9,11 @@ UnityPackageManager
 Temp
 UnityProject.Editor.csproj
 UnityProject.csproj
+Resource.meta
+Script.meta
+Tool.meta
+XLua.meta
+AppDelegate.unity.meta
+Main.unity.meta
+Plugins.meta
+RawResource.meta
