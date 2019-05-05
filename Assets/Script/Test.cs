@@ -19,18 +19,8 @@ public class Test : MonoBehaviour
     void Start()
     {
 
-        downloadButton.Clicked += async (o, e) =>
-        {
-            // This line will yield control to the UI as the request
-            // from the web service is happening.
-            //
-            // The UI thread is now free to perform other work.
-            var stringData = await _httpClient.GetStringAsync(URL);
-            DoSomethingWithData(stringData);
-        };
+
     }
-    //https://docs.microsoft.com/en-us/dotnet/csharp/async#feedback
-    private readonly HttpClient _httpClient = new HttpClient();
 
 
 
