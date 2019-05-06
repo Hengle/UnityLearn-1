@@ -5,12 +5,18 @@ using UnityEngine;
 public class AssetsService : MonoBehaviour
 {
 
+    private async void Awake()
+    {
+        await ResourceLoadAsync<GameObject>("");
+
+        //do something
+    }
+
     private IEnumerator ResourceLoadAsync<T>(string path) where T : Object
     {
         ResourceRequest asset = Resources.LoadAsync<T>(path);
         yield return asset;
         Debug.Log(asset.asset.name + "load success");
-        //do something 
     }
     private T ResourceLoad<T>(string path) where T : Object
     {
