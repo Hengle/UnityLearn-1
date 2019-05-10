@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class Lab : MonoBehaviour
 {
-    private List<string> _strList;
+
 
     private void Start()
     {
-        _strList = new List<string>();
-
-        for (int i = 0; i < 99999; i++)
-        {
-            _strList.Add("123123");
-        }
-
-        Debug.Log("List 初始化完成");
+        string n = "4";
+        Change(n);
+        //Change(ref n);
+        Debug.Log(n);
     }
 
-    private void OnDisable()
+
+    void Change(string n)
     {
-        
+        n = "10";
     }
 
-    private void OnDestroy()
+
+    void Change(ref string n)
     {
-        Debug.Log("释放List");
+        n = "10";
     }
 }
