@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 114753899226810432}
   - component: {fileID: 114280723033908940}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonOK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 224786680705833992}
   - component: {fileID: 114156813305089438}
   m_Layer: 5
-  m_Name: BGMToggle
+  m_Name: ToggleBGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 224581726586418236}
   - component: {fileID: 114869597706927040}
   m_Layer: 5
-  m_Name: SFXToggle
+  m_Name: ToggleSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 114753043605357246}
   - component: {fileID: 114124731666806558}
   m_Layer: 5
-  m_Name: CloseButton
+  m_Name: ButtonClose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -703,7 +703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160964f1216e38a4ab2ba9c4cdb1e072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PATH: 
   UIParent: {fileID: 0}
 --- !u!114 &114826584138562640
 MonoBehaviour:

@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ui.set;
 public class SetView : BaseView
 {
+    private Toggle _toggleSFX;
+    private Toggle _toggleBGM;
 
     public SetView()
     {
@@ -14,30 +17,41 @@ public class SetView : BaseView
     private void Awake()
     {
         Transform content = this.transform.Find("Content").transform;
-        Button buttonClose = content.transform.Find("ButtonClose").GetComponent<Button>(); 
-        Button buttonOK = content.transform.Find("ButtonOK").GetComponent<Button>(); 
-        Toggle toggleSFX = content.Find("ToggleSFX").GetComponent<Toggle>();
-        Toggle toggleBGM = content.Find("ToggleBGM").GetComponent<Toggle>();
+        Button buttonClose = content.transform.Find("ButtonClose").GetComponent<Button>();
+        Button buttonOK = content.transform.Find("ButtonOK").GetComponent<Button>();
+        _toggleSFX = content.Find("ToggleSFX").GetComponent<Toggle>();
+        Debug.Log(_toggleSFX == null);
+        _toggleBGM = content.Find("ToggleBGM").GetComponent<Toggle>();
 
         buttonClose.onClick.AddListener(OnButtonClose);
         buttonOK.onClick.AddListener(OnButtonOK);
-        toggleSFX.onValueChanged.AddListener(OnToggleSFX);
-        toggleBGM.onValueChanged.AddListener(OnToggleBGM);
+        _toggleSFX.onValueChanged.AddListener(OnToggleSFX);
+        _toggleBGM.onValueChanged.AddListener(OnToggleBGM);
+
+        Debug.Log("初始化完成");
+    }
+
+    public void UpdateView(SetModel setModel)
+    {
+        Debug.Log(_toggleSFX == null);
+        GameObject.Find("ToggleSFX").GetComponent<Toggle>().isOn = setModel.SetData.HasSFX;
+        //this._toggleBGM.isOn = setModel.SetData.HasBGM;
     }
 
     private void OnToggleBGM(bool arg0)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     private void OnToggleSFX(bool arg0)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     private void OnButtonClose()
     {
         Hide();
+        SetController.Instance.Dispose();
     }
 
     private void OnButtonOK()

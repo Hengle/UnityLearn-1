@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class UIFactory : MonoBehaviour
 {
+    public static UIFactory Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public BaseView GetUIView(string uiName)
     {
