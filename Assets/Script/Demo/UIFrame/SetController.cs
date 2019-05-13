@@ -21,14 +21,17 @@ public class SetController : MonoBehaviour
     {
         _buttonSet = this.transform.Find("ButtonSet").GetComponent<Button>();
         _buttonSet.onClick.AddListener(OnButtonSetClick);
-        SetModel = new SetModel();
-        SetView = (SetView)UIFactory.Instance.GetUIView("SetView");
-        SetModel.OnValueChange += SetView.UpdateView;
+      
+
     }
 
     private void OnButtonSetClick()
     {
+        SetModel = new SetModel();
+        SetView = (SetView)UIFactory.Instance.GetUIView("SetView");
         SetView.Show();
+
+        SetModel.OnValueChange += SetView.UpdateView;
         SetModel.UpdataData();
     }
 

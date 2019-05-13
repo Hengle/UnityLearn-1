@@ -20,22 +20,18 @@ public class SetView : BaseView
         Button buttonClose = content.transform.Find("ButtonClose").GetComponent<Button>();
         Button buttonOK = content.transform.Find("ButtonOK").GetComponent<Button>();
         _toggleSFX = content.Find("ToggleSFX").GetComponent<Toggle>();
-        Debug.Log(_toggleSFX == null);
         _toggleBGM = content.Find("ToggleBGM").GetComponent<Toggle>();
 
         buttonClose.onClick.AddListener(OnButtonClose);
         buttonOK.onClick.AddListener(OnButtonOK);
         _toggleSFX.onValueChanged.AddListener(OnToggleSFX);
         _toggleBGM.onValueChanged.AddListener(OnToggleBGM);
-
-        Debug.Log("初始化完成");
     }
 
     public void UpdateView(SetModel setModel)
     {
-        Debug.Log(_toggleSFX == null);
-        GameObject.Find("ToggleSFX").GetComponent<Toggle>().isOn = setModel.SetData.HasSFX;
-        //this._toggleBGM.isOn = setModel.SetData.HasBGM;
+        this._toggleSFX.isOn = setModel.SetData.HasSFX;
+        this._toggleBGM.isOn = setModel.SetData.HasBGM;
     }
 
     private void OnToggleBGM(bool arg0)
