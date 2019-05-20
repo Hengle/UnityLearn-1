@@ -45,4 +45,21 @@ public class UnityExtension : MonoBehaviour
         ColorUtility.TryParseHtmlString(htmlString, out color);
         return color;
     }
+
+
+
+    public static Transform FindInChild(this Transform transform, string name)
+    {
+        Transform[] transforms = transform.GetComponentsInChildren<Transform>();
+
+        for (int i = 0; i < transforms.Length; i++)
+        {
+            if (transforms[i].name.Equals(name))
+            {
+                return transforms[i];
+            }
+        }
+        
+        return null;
+    }
 }
