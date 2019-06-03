@@ -8,21 +8,15 @@ public class Lab : MonoBehaviour
 
     private void Start()
     {
-        string n = "4";
-        Change(n);
-        //Change(ref n);
-        Debug.Log(n);
+
+        //#CC00FF
+        //255 180 0 0
+
+        Debug.Log(UnityExtension.HtmlStringToRGBA("#FF0000FF"));
+
+        Debug.Log(UnityExtension.RGBAToHtmlString(UnityExtension.HtmlStringToRGBA("#FF0000FF")));
+
     }
 
 
-    void Change(string n)
-    {
-        n = "10";
-    }
-
-
-    void Change(ref string n)
-    {
-        n = "10";
-    }
 }
