@@ -2,21 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+
 public class Lab : MonoBehaviour
 {
-
-
-    private void Start()
+    private void Awake()
     {
-
-        //#CC00FF
-        //255 180 0 0
-
-        Debug.Log(UnityExtension.HtmlStringToRGBA("#FF0000FF"));
-
-        Debug.Log(UnityExtension.RGBAToHtmlString(UnityExtension.HtmlStringToRGBA("#FF0000FF")));
-
+       
     }
-
-
 }

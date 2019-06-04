@@ -13,18 +13,26 @@ namespace XLuaTest
 {
     public class Helloworld : MonoBehaviour
     {
+
+        LuaEnv _luaenv;
+
         // Use this for initialization
         void Start()
         {
-            LuaEnv luaenv = new LuaEnv();
-            luaenv.DoString("CS.UnityEngine.Debug.Log('hello world')");
-            luaenv.Dispose();
+            _luaenv = new LuaEnv();
+            _luaenv.DoString("CS.UnityEngine.Debug.Log('hello world ')");
         }
 
         // Update is called once per frame
         void Update()
         {
+           
+        }
 
+
+        private void OnDestroy()
+        {
+            _luaenv.Dispose();
         }
     }
 }
