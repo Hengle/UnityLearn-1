@@ -46,16 +46,13 @@ public class TabWindowComponent : MonoBehaviour
             toggles[tempIndex].group = _toggleGroup;
             toggles[tempIndex].onValueChanged.AddListener((isOn) =>
             {
-                if (_currentIndex != tempIndex)
+                if (isOn && (_currentIndex != tempIndex))
                 {
-                    if (isOn)
-                    {
-                        _currentIndex = tempIndex;
-                        tabDelegate(tempIndex);
-                    }
-                    lable.color = isOn ? ColorOn : ColorOff;
-                    lable.fontSize = isOn ? FontSizeOn : FontSizeOff;
+                    _currentIndex = tempIndex;
+                    tabDelegate(tempIndex);
                 }
+                lable.color = isOn ? ColorOn : ColorOff;
+                lable.fontSize = isOn ? FontSizeOn : FontSizeOff;
             });
         }
         toggles[defaultIndex].isOn = true;
