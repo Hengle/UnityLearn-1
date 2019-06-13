@@ -2,16 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIFactory : MonoBehaviour
+public class UIFactory : MonoSingleton<UIFactory>
 {
-    public static UIFactory Instance { get; private set; }
-
     private readonly string UIBASEPATH = "Prefabs/UI/";
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
 
     public BaseView GetUIView(string uiName)
@@ -28,6 +21,33 @@ public class UIFactory : MonoBehaviour
             return null;
         }
     }
+
+    public T GetUI<T>(string path) where T : Object
+    {
+        T uiOriginal = Resources.Load<T>(UIBASEPATH + path);
+        if (uiOriginal == null)
+        {
+            Debug.LogError("路径有误：" + UIBASEPATH + path);
+            return null;
+        }
+        T ui = Instantiate(uiOriginal);
+        return ui;
+    }
+
+
+    public T GetUI<T>(string path, Transform parent) where T : Object
+    {
+        T uiOriginal = Resources.Load<T>(UIBASEPATH + path);
+        if (uiOriginal == null)
+        {
+            Debug.LogError("路径有误：" + UIBASEPATH + path);
+            return null;
+        }
+        T ui = Instantiate(uiOriginal, parent);
+        return ui;
+    }
+
+
 
 
     private Transform GetUIParent()
