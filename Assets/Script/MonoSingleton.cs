@@ -6,7 +6,7 @@ public class MonoSingleton<T> : MonoBehaviour
     where T : class
 {
 
-    public T Instance { get; private set; }
+    public static T Instance { get; private set; }
 
 
     protected void Awake()

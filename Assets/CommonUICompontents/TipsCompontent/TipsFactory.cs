@@ -26,6 +26,5 @@ public class TipsFactory : MonoSingleton<TipsFactory>
 
     public void Dispose()
     {
-
     }
 }

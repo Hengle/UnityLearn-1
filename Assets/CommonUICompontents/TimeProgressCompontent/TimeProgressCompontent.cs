@@ -76,7 +76,7 @@ public class TimeProgressCompontent : MonoBehaviour
                 //如果不存在
                 if (tipsCompontent == null)
                 {
-                    tipsCompontent = TipsFactory.ins.GetTips(TipsSize.Small, TipsDirection.Down);
+                    tipsCompontent = TipsFactory.Instance.GetTips(TipsSize.Small, TipsDirection.Down);
                     //弹窗位置
                     tipsCompontent.SetPosition(toggles[tempIndex].transform, Offset);
                     //弹窗内容
