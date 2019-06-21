@@ -12,11 +12,16 @@ public class Lab : MonoBehaviour
 {
     private void Awake()
     {
-       
-    }
-    private void Start()
-    {
-        this.transform.GetComponent<Toggle>().onValueChanged.AddListener(OnToggle);
+        //good
+        //for (int i = 0; i < transform.childCount; i++)
+        //{
+        //    Destroy(transform.GetChild(i).gameObject);
+        //}
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(0).gameObject);
+        }
     }
 
     private void OnToggle(bool arg0)
