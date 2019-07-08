@@ -18,6 +18,16 @@ public class AssetsService : MonoBehaviour
         yield return asset;
         Debug.Log(asset.asset.name + "load success");
     }
+
+    IEnumerator LoadDynamicPrefab(string path, Action callback = null)
+    {
+        ResourceRequest r = Resources.LoadAsync(path, typeof(UnityEngine.Object));
+        while (!r.isDone)
+        {
+            yield return null;
+        }
+    }
+
     private T ResourceLoad<T>(string path) where T : Object
     {
         return Resources.Load<T>(path);
