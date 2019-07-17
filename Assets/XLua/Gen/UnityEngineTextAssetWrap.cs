@@ -58,6 +58,15 @@ namespace XLua.CSObjectWrap
                     
 					return 1;
 				}
+				if(LuaAPI.lua_gettop(L) == 2 && (LuaAPI.lua_isnil(L, 2) || LuaAPI.lua_type(L, 2) == LuaTypes.LUA_TSTRING))
+				{
+					string _text = LuaAPI.lua_tostring(L, 2);
+					
+					UnityEngine.TextAsset gen_ret = new UnityEngine.TextAsset(_text);
+					translator.Push(L, gen_ret);
+                    
+					return 1;
+				}
 				
 			}
 			catch(System.Exception gen_e) {

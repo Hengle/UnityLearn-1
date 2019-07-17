@@ -1,23 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AssetsService : MonoBehaviour
 {
 
-    private async void Awake()
-    {
-        await ResourceLoadAsync<GameObject>("");
+    //private async void Awake()
+    //{
+    //    await ResourceLoadAsync<GameObject>("");
 
-        //do something
-    }
+    //    //do something
+    //}
 
-    private IEnumerator ResourceLoadAsync<T>(string path) where T : Object
-    {
-        ResourceRequest asset = Resources.LoadAsync<T>(path);
-        yield return asset;
-        Debug.Log(asset.asset.name + "load success");
-    }
+    //private IEnumerator ResourceLoadAsync<T>(string path) where T : Object
+    //{
+    //    ResourceRequest asset = Resources.LoadAsync<T>(path);
+    //    yield return asset;
+    //    Debug.Log(asset.asset.name + "load success");
+    //}
 
     IEnumerator LoadDynamicPrefab(string path, Action callback = null)
     {
@@ -28,10 +29,10 @@ public class AssetsService : MonoBehaviour
         }
     }
 
-    private T ResourceLoad<T>(string path) where T : Object
-    {
-        return Resources.Load<T>(path);
-    }
+    //private T ResourceLoad<T>(string path) where T : Object
+    //{
+    //    return Resources.Load<T>(path);
+    //}
 
 
     public void Dispose()

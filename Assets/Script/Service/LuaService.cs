@@ -17,7 +17,7 @@ public class LuaService : MonoBehaviour
 
     private void OnDisable()
     {
-        _luaEnv.DoString("require 'LuaDisposeScript'");
+        _luaEnv.DoString("require 'LuaDispose'");
     }
 
     private void OnDestroy()

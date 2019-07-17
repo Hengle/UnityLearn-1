@@ -8,14 +8,14 @@ namespace UnityEngine.UI
     {
         public Image Image;
         public Color NormalColor = new Color(1, 1, 1, 1);
-        public Color PressendColor = Util.HexToColor("C8C8C8FF");
+        //public Color PressendColor = Util.HexToColor("C8C8C8FF");
 
         public void OnPointerDown(PointerEventData eventData)
         {
             if (Image != null&&Image.sprite != null)
             {
                 NormalColor = Image.color;
-                Image.color = PressendColor;
+                //Image.color = PressendColor;
             }
 
         }

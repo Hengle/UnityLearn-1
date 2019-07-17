@@ -122,9 +122,9 @@ namespace XLua.CSObjectWrap
             
                 if(gen_param_count == 2&& translator.Assignable<UnityEngine.Transform>(L, 2)) 
                 {
-                    UnityEngine.Transform _parent = (UnityEngine.Transform)translator.GetObject(L, 2, typeof(UnityEngine.Transform));
+                    UnityEngine.Transform _p = (UnityEngine.Transform)translator.GetObject(L, 2, typeof(UnityEngine.Transform));
                     
-                    gen_to_be_invoked.SetParent( _parent );
+                    gen_to_be_invoked.SetParent( _p );
                     
                     
                     
@@ -298,9 +298,9 @@ namespace XLua.CSObjectWrap
                 }
                 if(gen_param_count == 2&& translator.Assignable<UnityEngine.Vector3>(L, 2)) 
                 {
-                    UnityEngine.Vector3 _eulerAngles;translator.Get(L, 2, out _eulerAngles);
+                    UnityEngine.Vector3 _eulers;translator.Get(L, 2, out _eulers);
                     
-                    gen_to_be_invoked.Rotate( _eulerAngles );
+                    gen_to_be_invoked.Rotate( _eulers );
                     
                     
                     
@@ -332,10 +332,10 @@ namespace XLua.CSObjectWrap
                 }
                 if(gen_param_count == 3&& translator.Assignable<UnityEngine.Vector3>(L, 2)&& translator.Assignable<UnityEngine.Space>(L, 3)) 
                 {
-                    UnityEngine.Vector3 _eulerAngles;translator.Get(L, 2, out _eulerAngles);
+                    UnityEngine.Vector3 _eulers;translator.Get(L, 2, out _eulers);
                     UnityEngine.Space _relativeTo;translator.Get(L, 3, out _relativeTo);
                     
-                    gen_to_be_invoked.Rotate( _eulerAngles, _relativeTo );
+                    gen_to_be_invoked.Rotate( _eulers, _relativeTo );
                     
                     
                     
@@ -882,9 +882,9 @@ namespace XLua.CSObjectWrap
             
                 
                 {
-                    string _name = LuaAPI.lua_tostring(L, 2);
+                    string _n = LuaAPI.lua_tostring(L, 2);
                     
-                        UnityEngine.Transform gen_ret = gen_to_be_invoked.Find( _name );
+                        UnityEngine.Transform gen_ret = gen_to_be_invoked.Find( _n );
                         translator.Push(L, gen_ret);
                     
                     
