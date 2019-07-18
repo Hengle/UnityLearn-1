@@ -5,6 +5,15 @@ public class Lab : MonoBehaviour
     private void Awake()
     {
 
+        Item current;
+
+
+    }
+
+
+    class Item
+    {
+
     }
 
     private void Func()
