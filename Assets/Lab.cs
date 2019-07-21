@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Lab : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Lab : MonoBehaviour
 
         Item current;
 
+        Debug.Log(Math.Pow(10, 2));
 
     }
 
@@ -14,6 +16,13 @@ public class Lab : MonoBehaviour
     class Item
     {
 
+    }
+
+    [ContextMenu("Play")]
+    private void Play()
+    {
+        Debug.Log("do lua ");
+        // do lua
     }
 
     private void Func()
@@ -25,7 +34,8 @@ public class Lab : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Func();
+            LuaService.Instance.LoadLuaScript();
+            Play();
         }
     }
 }

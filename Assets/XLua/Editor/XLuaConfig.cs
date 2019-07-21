@@ -35,10 +35,6 @@ public static class XLuaConfig
                 {
                     list.Add(type);
                 }
-                else if (type.Namespace.IndexOf("com.galasports", StringComparison.Ordinal) != -1)
-                {
-                    list.Add(type);
-                }
             }
             return list;
         }

@@ -6,13 +6,16 @@ using XLua;
 public class LuaService : MonoBehaviour
 {
     private LuaEnv _luaEnv;
-    public static LuaService Instance;
+    public static LuaService Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
-        _luaEnv = new LuaEnv();
-        _luaEnv.AddLoader(MyLoader);
-        _luaEnv.DoString("require 'LuaScript'");
+        LoadLuaScript();
     }
 
     private void OnDisable()
@@ -23,6 +26,17 @@ public class LuaService : MonoBehaviour
     private void OnDestroy()
     {
         _luaEnv.Dispose();
+    }
+
+    public void LoadLuaScript()
+    {
+        //if (_luaEnv == null)
+        {
+            _luaEnv = new LuaEnv();
+        }
+        //_luaEnv.ClearLoadList();
+        _luaEnv.AddLoader(MyLoader);
+        _luaEnv.DoString("require 'LuaScript'");
     }
 
     private byte[] MyLoader(ref string fileName)

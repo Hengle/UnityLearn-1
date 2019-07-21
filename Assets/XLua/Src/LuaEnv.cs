@@ -607,6 +607,18 @@ namespace XLua
             customLoaders.Add(loader);
         }
 
+        public void RemoveLoad(CustomLoader loader)
+        {
+            customLoaders.Remove(loader);
+        }
+        /// <summary>
+        /// 清理已经添加的LoadList
+        /// </summary>
+        public void ClearLoadList()
+        {
+            customLoaders.Clear();
+        }
+
         internal Dictionary<string, LuaCSFunction> buildin_initer = new Dictionary<string, LuaCSFunction>();
 
         public void AddBuildin(string name, LuaCSFunction initer)
