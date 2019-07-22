@@ -1,3 +1,4 @@
+local  util = require 'util'
 -- Hello Word
 print('hello,this message from lua Script !')
 
@@ -8,17 +9,52 @@ end)
 xlua.hotfix(CS.Lab,'Play',function(self)
 	
 	--loop()
-	--Debug(max(1,2))
+	--print(max(1,2))
 	--LuaClassTest()
-	LuaOperator()
+	--LuaOperator()
+	--LuaIterator()
+	--local n,m = LuaRetun()
+	--print("n:",n,"m",m)
 end)
 
-function  Debug(obj)
-	
-	print(obj)
-
+--可以一次返回多个参数
+function LuaRetun( ... )
+	x = 10
+	y = 100
+	return  x,y
 end
 
+--迭代器
+function LuaIterator( ... )
+
+	--[[
+	array = {"arr1","arr2"}
+	--pairs
+	for key , value in pairs(array) do
+		print(key,value)
+	end
+	--ipairs
+	for  key , value in ipairs(array) do
+		print(key,value)
+	end
+	]]
+
+	myTable = {}
+	myTable[1] = "111"
+	myTable[2] = "222"
+	myTable[4] = "444"
+	--pairs
+	print(">>>>pairs:")
+	for k,v in pairs(myTable) do
+		print(k,v)
+	end
+
+	--ipairs 遍历一组数组，如果使用ipairs，遇到非连续的整形key就会停止便利，
+	print(">>>>ipairs:")
+	for i,v in ipairs(myTable) do
+		print(i,v)
+	end
+end
 
 function  loop()
 
@@ -50,12 +86,12 @@ function  LuaClassTest( ... )
 	--初始化表
 	myTable = {}
 	--myTable的类型
-	Debug(type(myTable))
+	print(type(myTable))
 
 	--指定值
 	myTable[1] = "lua"
 
-	Debug(myTable[1])
+	print(myTable[1])
 	
 
 	myTable["wow"] = "修改前"
@@ -92,21 +128,25 @@ function  LuaClassTest( ... )
 
 end
 
-
 function  LuaOperator( ... )
 	print(10^2)
 	print(4^3 * 16^4 * 16^3)
 end
 
+--[[
+xlua.private_accessible(CS.Lab)
+util.hotfix_ex(CS.Lab,'Play',function(self)
+	self:Play()
+	print("do lua 2")
+end)
+]]
 
+--
+xlua.private_accessible(CS.Lab)
+util.hotfix_ex(CS.Lab,"Play",function(self)
+	-- 先执行原来的逻辑
+	self.Play(self)
+	-- 再执行新的逻辑
+	print("do lua 2")
+end)
 
-
-
-
-
-
---util.hotfix_ex(CS.,'',function(self,number)
---	self.GoldChange(self,number)
-
---	print('1.3.1 GoldChange HotFix Success!')
---end)
