@@ -5,17 +5,8 @@ public class Lab : MonoBehaviour
 {
     private void Awake()
     {
-
-        Item current;
-
-        Debug.Log(Math.Pow(10, 2));
-
-    }
-
-
-    class Item
-    {
-
+        MsgBase msgBase = new MsgBase(3003);
+        Debug.Log(msgBase.GetManagerId().ToString());
     }
 
     [ContextMenu("Play")]
