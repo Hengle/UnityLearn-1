@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
+using UnityEditor;
 public class Lab : MonoBehaviour
 {
     private void Awake()
@@ -15,7 +15,6 @@ public class Lab : MonoBehaviour
         Debug.Log("do lua ");
         // do lua
     }
-
     private void Func()
     {
         Debug.Log("this message is form CSharp....");
