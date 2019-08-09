@@ -48,3 +48,37 @@ Notes:
 
 For a Compact Framework 3.5 and Silverlight 3.0 builds download Json.NET 3.5
 For a Silverlight 4.0 and Windows Phone 7 builds download Json.NET 5
+
+
+
+
+
+local util=require 'xlua/util'
+
+xlua.private_accessible(CS.CountryPvpDataManager)
+util.hotfix_ex(CS.CountryPvpDataManager, "AnalysisFightRule", function(self,record30DayCapAllMax)
+
+	local zone = self.Zone
+
+	self:AnalysisFightRule(record30DayCapAllMax)
+
+	if(self.IsSignUp) then
+		self.Zone = zone
+			if(zone ~= -1 and zone ~= 0) then
+				self.ZoneName = CS.com.galasports.basketballmaster.Languages.LanguageService.Instance:GetStringByKey("GlobalFight/ZoneName" .. zone)
+			end
+	end
+
+end)
+
+xlua.private_accessible(CS.CountryPvpDataManager)
+util.hotfix_ex(CS.CountryPvpDataManager, "AnalysisGlobalFightSignUpPB", function(self,pb)
+	self:AnalysisGlobalFightSignUpPB(pb)
+		
+	if( pb.is_sign == 1) then
+		if(zone ~= -1 and zone ~= 0) then
+			self.ZoneName = CS.com.galasports.basketballmaster.Languages.LanguageService.Instance:GetStringByKey("GlobalFight/ZoneName" .. pb.fight_zone)
+		end
+	end
+
+end)
