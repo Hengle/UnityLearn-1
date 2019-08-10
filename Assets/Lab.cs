@@ -6,7 +6,7 @@ public class Lab : MonoBehaviour
     private void Awake()
     {
         MsgBase msgBase = new MsgBase(3003);
-        Debug.Log(msgBase.GetManagerId().ToString());
+        Debug.Log(msgBase.GetManager().ToString());
     }
 
     [ContextMenu("Play")]

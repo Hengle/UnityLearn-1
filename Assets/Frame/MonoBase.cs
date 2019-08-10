@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonoBase : MonoBehaviour
+public abstract class MonoBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// 处理一个消息
+    /// </summary>
+    /// <param name="tempMsg"></param>
+    public abstract void ProcessEvent(MsgBase tempMsg);
 }

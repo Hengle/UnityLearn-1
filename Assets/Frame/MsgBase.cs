@@ -1,15 +1,15 @@
 ﻿public class MsgBase
 {
-    private ushort _msgId;
+    public ushort MsgId;
 
     public MsgBase(ushort msgId)
     {
-        _msgId = msgId;
+        MsgId = msgId;
     }
 
-    public ManagerId GetManagerId()
+    public ManagerId GetManager()
     {
-        int tempId = _msgId / FrameTool.MsgSpan;
+        int tempId = MsgId / FrameTool.MsgSpan;
         return (ManagerId)(tempId * FrameTool.MsgSpan);
     }
 }
