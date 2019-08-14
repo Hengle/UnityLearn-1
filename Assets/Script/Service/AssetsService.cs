@@ -5,13 +5,30 @@ using UnityEngine;
 
 public class AssetsService : MonoBehaviour
 {
+    public static AssetsService Instance { get; private set; }
 
-    //private async void Awake()
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    //public T LoadAssetAsyn<T>(string path) where T : UnityEngine.Object
     //{
-    //    await ResourceLoadAsync<GameObject>("");
+    //    if (Config.LoadAssetType.Equals(LoadAssetType.Resources))
+    //    {
 
-    //    //do something
+    //    }
+    //    else
+    //    {
+    //        //WWW加载
+    //        return null;
+    //    }
     //}
+
+    public T LoadAsset<T>(string path) where T : UnityEngine.Object
+    {
+        return Resources.Load<T>(path);        
+    }
 
     //private IEnumerator ResourceLoadAsync<T>(string path) where T : Object
     //{
@@ -20,14 +37,14 @@ public class AssetsService : MonoBehaviour
     //    Debug.Log(asset.asset.name + "load success");
     //}
 
-    IEnumerator LoadDynamicPrefab(string path, Action callback = null)
-    {
-        ResourceRequest r = Resources.LoadAsync(path, typeof(UnityEngine.Object));
-        while (!r.isDone)
-        {
-            yield return null;
-        }
-    }
+    //IEnumerator LoadDynamicPrefab(string path, Action callback = null)
+    //{
+    //    ResourceRequest r = Resources.LoadAsync(path, typeof(UnityEngine.Object));
+    //    while (!r.isDone)
+    //    {
+    //        yield return null;
+    //    }
+    //}
 
     //private T ResourceLoad<T>(string path) where T : Object
     //{
@@ -35,10 +52,10 @@ public class AssetsService : MonoBehaviour
     //}
 
 
-    public void Dispose()
-    {
-        Resources.UnloadUnusedAssets();
-    }
+    //public void Dispose()
+    //{
+    //    Resources.UnloadUnusedAssets();
+    //}
 
     /// <summary>
     /// 

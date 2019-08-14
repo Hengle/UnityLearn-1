@@ -1,0 +1,13 @@
+﻿{
+	"languages": 
+	[
+		{
+			"key":"yes",
+			"value":"确定"
+		},
+		{
+			"key":"no",
+			"value":"不"
+		}
+	]
+}
