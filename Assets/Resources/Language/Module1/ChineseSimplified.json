@@ -1,1 +1,9 @@
-﻿
+﻿{
+	"languages": 
+	[
+		{
+			"key": "module1",
+			"value": "模块1"
+		}
+	]
+}

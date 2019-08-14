@@ -2,12 +2,12 @@
 	"languages": 
 	[
 		{
-			"key":"yes",
-			"value":"确定"
+			"key": "yes",
+			"value": "确定"
 		},
 		{
-			"key":"no",
-			"value":"不"
+			"key": "no",
+			"value": "不"
 		}
 	]
 }

@@ -29,5 +29,11 @@ public class Lab : MonoBehaviour
     {
         string str = LanguageService.Instance.GetString(Module.Common, "yes");
         Debug.Log(str);
+
+
+
+        string str1 = LanguageService.Instance.GetString(Module.Module1, "module1");
+        Debug.Log(str1);
+
     }
 }

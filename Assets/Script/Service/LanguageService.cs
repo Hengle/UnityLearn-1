@@ -77,7 +77,6 @@ public class LanguageService : MonoBehaviour
             string value = languageList.languages[i].value;
             dict.Add(key, value);
         }
-
         _languageDict.Add(module, dict);
     }
 
@@ -86,17 +85,3 @@ public class LanguageService : MonoBehaviour
         _languageDict.Clear();
     }
 }
-
-[System.Serializable]
-public class LanguageList
-{
-    public List<LanguageItem> languages;
-}
-
-[System.Serializable]
-public class LanguageItem
-{
-    public string key;
-    public string value;
-}
-
