@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class UIBehaviour : MonoBehaviour
+public class UIComponentController : MonoBehaviour
 {
     private void Awake()
     {
-        UIManager.Instance.RegistGameObject(name, gameObject); 
+        UIManager.Instance.RegistGameObject(name, gameObject);
     }
 
     public void AddButtonListenter(UnityAction unityAction)

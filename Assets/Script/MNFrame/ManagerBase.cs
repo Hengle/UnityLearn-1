@@ -123,7 +123,7 @@ public class ManagerBase : MonoBase
                     EventTree.Remove(id);
                 }
             }
-            else///去掉尾部和中间的部分
+            else//去掉尾部和中间的部分
             {
                 while (temp.next != null && temp.next.data != null)
                 {
