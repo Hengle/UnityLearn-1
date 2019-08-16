@@ -2,20 +2,6 @@ local  util = require 'util'
 -- Hello Word
 print('hello,this message from lua Script !')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 xlua.hotfix(CS.Lab,'Func',function(self)
 	print('this message is from lua hahah ')
 end)

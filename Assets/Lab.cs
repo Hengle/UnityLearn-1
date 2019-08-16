@@ -1,18 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Lab : MonoBehaviour
 {
-    [ContextMenu("Play")]
-    private void Play()
+    public Image _image;
+    private readonly string url = "http://192.168.1.243:8082/basketball/head_frame/8.png";
+
+    private void Start()
     {
-        Debug.Log("do lua ");
-        // do lua
+        //string str = LanguageService.Instance.GetString(Module.Common, "yes");
+        //Debug.Log(str);
+        //string str1 = LanguageService.Instance.GetString(Module.Module1, "module1");
+        //Debug.Log(str1);
+
+
+        //StartCoroutine(AssetsService.Instance.DownTexture(url, false, (sprite) =>
+        // {
+        //     _image.sprite = sprite;
+        // }));
+
+        Fun();
     }
-    private void Func()
+
+
+    private async void Fun()
     {
-        Debug.Log("this message is form CSharp....");
+        await AssetsService.Instance.DownTexture(url, false, (sprite) =>
+        {
+            _image.sprite = sprite;
+        });
+    }
+
+    private void Fun1()
+    {
+
     }
 
     public void Update()
@@ -24,16 +48,15 @@ public class Lab : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    [ContextMenu("Play")]
+    private void Play()
     {
-        string str = LanguageService.Instance.GetString(Module.Common, "yes");
-        Debug.Log(str);
+        Debug.Log("do lua ");
+        // do lua
+    }
 
-
-
-        string str1 = LanguageService.Instance.GetString(Module.Module1, "module1");
-        Debug.Log(str1);
-
+    private void Func()
+    {
+        Debug.Log("this message is form CSharp....");
     }
 }

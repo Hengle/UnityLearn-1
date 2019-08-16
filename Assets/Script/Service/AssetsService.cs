@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class AssetsService : MonoBehaviour
 {
@@ -10,6 +11,62 @@ public class AssetsService : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="cache"></param>
+    /// <returns></returns>
+    public IEnumerator DownTexture(string url, bool cache = false, Action<Sprite> action = null)
+    {
+        //如果本地存在
+        //...
+        UnityWebRequest request = new UnityWebRequest(url);
+        DownloadHandlerTexture handler = new DownloadHandlerTexture(true);
+        request.downloadHandler = handler;
+        yield return request.SendWebRequest();
+        if (string.IsNullOrEmpty(request.error))
+        {
+            Texture2D texture = handler.texture;
+            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, 1f);
+            action?.Invoke(sprite);
+            if (cache)
+            {
+                //写入本地
+            }
+        }
+        request.Dispose();
+        handler.Dispose();
+    }
+
+
+    IEnumerator DownAssetBundle<T>(string resName, string url) where T : UnityEngine.Object
+    {
+        UnityWebRequest unityWebRequest = UnityWebRequestAssetBundle.GetAssetBundle("url");
+        yield return unityWebRequest.SendWebRequest();
+        AssetBundle assetBundle = (unityWebRequest.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
+        T gameObject = assetBundle.LoadAsset<T>(resName);
+    }
+
+
+    public IEnumerator DownAsset(string url, bool cache = false)
+    {
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            Debug.LogError(request.error);
+
+        }
+        else
+        {
+            //request.downloadHandler.
+            if (cache)
+            {
+                //写入本地
+            }
+        }
     }
 
     //public T LoadAssetAsyn<T>(string path) where T : UnityEngine.Object
@@ -27,7 +84,7 @@ public class AssetsService : MonoBehaviour
 
     public T LoadAsset<T>(string path) where T : UnityEngine.Object
     {
-        return Resources.Load<T>(path);        
+        return Resources.Load<T>(path);
     }
 
     //private IEnumerator ResourceLoadAsync<T>(string path) where T : Object
