@@ -13,6 +13,16 @@ public class UIManager : ManagerBase
     {
         Instance = this;
     }
+
+    public GameObject GetGameObject(string name)
+    {
+        if (_sonMember.ContainsKey(name))
+        {
+            return _sonMember[name];
+        }
+        return null;
+    }
+
     public void RegistGameObject(string name, GameObject obj)
     {
         if (!_sonMember.ContainsKey(name))

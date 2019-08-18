@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
-public class UIComponentController : MonoBehaviour
+/// <summary>
+/// 把控件的Script注册到UIManager
+/// 可以直接查找物体
+/// 把物体本身注册到UIManager
+/// </summary>
+public class UIBehaviour : MonoBehaviour
 {
     private void Awake()
     {

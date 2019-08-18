@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class UIBase : MonoBase
 {
+
+    public ushort[] msgIds;
+
     public override void ProcessEvent(MsgBase tempMsg)
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void RegistSelf(MonoBase mono, params ushort[] msg)
@@ -24,10 +27,11 @@ public class UIBase : MonoBase
         UIManager.Instance.SendMsg(msg);
     }
 
-    public short[] msgIds;
-
     private void OnDestroy()
     {
-        
+        if (msgIds != null)
+        {
+            UnRegistSelf(this, msgIds);
+        }
     }
 }
