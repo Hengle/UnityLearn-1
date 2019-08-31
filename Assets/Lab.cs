@@ -29,15 +29,15 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //GetInfoAsync()
 
 
-        Debug.Log("1");
-        await Task.Delay(1000);
-        Debug.Log("2");
-        await Task.Delay(1000);
-        Debug.Log("3");
-        await Task.Delay(1000);
-        Debug.Log("4");
-        await SetAsync();
-        Debug.Log("4444444444444");
+        //Debug.Log("1");
+        //await Task.Delay(1000);
+        //Debug.Log("2");
+        //await Task.Delay(1000);
+        //Debug.Log("3");
+        //await Task.Delay(1000);
+        //Debug.Log("4");
+        //await SetAsync();
+        //Debug.Log("4444444444444");
     }
 
 
@@ -60,6 +60,35 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         {
             LuaService.Instance.LoadLuaScript();
             Play();
+        }
+
+
+
+        CheckDoubleClick();
+    }
+
+    float _time1;
+    float _time2;
+
+    private void CheckDoubleClick()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _time2 = Time.realtimeSinceStartup;
+
+            Debug.Log("_time2：" + _time2);
+            Debug.Log("_time1：" + _time1);
+
+            if (_time2 - _time1 < 0.2f)
+            {
+
+                Debug.Log("OnDoubleClickEvent");
+                //if (OnDoubleClickEvent != null)
+                //{
+                //    OnDoubleClickEvent();
+                //}
+            }
+            _time1 = _time2;
         }
     }
 
