@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,5 +54,30 @@ public static class UnityExtension
         }
 
         return null;
+    }
+
+
+
+    /// <summary>
+    /// 随机打乱顺序
+    /// </summary>
+    /// <param name="list"></param>
+    /// <returns></returns>
+    private static List<T> BreakSortList<T>(List<T> list)
+    {
+        var random = new System.Random();
+        var newList = new List<T>();
+        for (int i = 0; i < list.Count; i++)
+        {
+            newList.Insert(random.Next(newList.Count + 1), list[i]);
+        }
+        return newList;
+    }
+
+    private static int Season(this DateTime dataTime)
+    {
+
+        //dataTime.da
+        return 1;
     }
 }

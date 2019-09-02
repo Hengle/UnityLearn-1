@@ -1,94 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
-    public Image _image;
-    private readonly string url = "http://192.168.1.243:8082/basketball/head_frame/8.png";
 
-    private async void Start()
+    private void Start()
     {
-        //string str = LanguageService.Instance.GetString(Module.Common, "yes");
-        //Debug.Log(str);
-        //string str1 = LanguageService.Instance.GetString(Module.Module1, "module1");
-        //Debug.Log(str1);
-
-
-        //StartCoroutine(AssetsService.Instance.DownTexture(url, false, (sprite) =>
-        // {
-        //     _image.sprite = sprite;
-        // }));
-
-        Fun();
-
-        //GetInfoAsync()
-
-
-        //Debug.Log("1");
-        //await Task.Delay(1000);
-        //Debug.Log("2");
-        //await Task.Delay(1000);
-        //Debug.Log("3");
-        //await Task.Delay(1000);
-        //Debug.Log("4");
-        //await SetAsync();
-        //Debug.Log("4444444444444");
-    }
-
-
-    private async void Fun()
-    {
-        //await AssetsService.Instance.DownTexture(url, false, (sprite) =>
-        //{
-        //    _image.sprite = sprite;
-        //});
-    }
-
-    private void Fun1()
-    {
-
     }
 
     public void Update()
     {
+
         if (Input.GetMouseButtonDown(1))
         {
-            LuaService.Instance.LoadLuaScript();
-            Play();
-        }
 
-
-
-        CheckDoubleClick();
-    }
-
-    float _time1;
-    float _time2;
-
-    private void CheckDoubleClick()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            _time2 = Time.realtimeSinceStartup;
-
-            Debug.Log("_time2：" + _time2);
-            Debug.Log("_time1：" + _time1);
-
-            if (_time2 - _time1 < 0.2f)
-            {
-
-                Debug.Log("OnDoubleClickEvent");
-                //if (OnDoubleClickEvent != null)
-                //{
-                //    OnDoubleClickEvent();
-                //}
-            }
-            _time1 = _time2;
         }
     }
 
@@ -97,11 +24,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     {
         Debug.Log("do lua ");
         // do lua
-    }
-
-    private void Func()
-    {
-        Debug.Log("this message is form CSharp....");
     }
 
 
@@ -139,5 +61,57 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         await Task.Delay(4 * 1000);
 
         Debug.Log(1111);
+    }
+
+
+    /// <summary>
+    /// 朗母达表达式排序
+    /// </summary>
+    private void LongmudaLab()
+    {
+        var list = new List<Student>
+            {
+                new Student (10,160),
+                new Student (20,170),
+                new Student (20,150)
+            };
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            Debug.Log(list[i].ToString());
+        }
+
+        //按照年龄排序
+        //如果年龄一致的话则按照身高排序
+        list.Sort((item1, item2) =>
+        {
+            if (item1.Age == item2.Age)
+            {
+                return item1.Height.CompareTo(item2.Height);
+            }
+            return item1.Age.CompareTo(item2.Age);
+        });
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            Debug.Log(list[i].ToString());
+        }
+    }
+
+    private class Student
+    {
+        public int Age;
+        public int Height;
+
+        public Student(int age, int height)
+        {
+            Age = age;
+            Height = height;
+        }
+
+        public override string ToString()
+        {
+            return ("Age:" + Age + " Height:" + Height);
+        }
     }
 }
