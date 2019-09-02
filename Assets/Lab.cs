@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
@@ -15,8 +16,11 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
         if (Input.GetMouseButtonDown(1))
         {
-
+            RenderTextureLab();
         }
+
+
+    
     }
 
     [ContextMenu("Play")]
@@ -61,6 +65,26 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         await Task.Delay(4 * 1000);
 
         Debug.Log(1111);
+    }
+
+    
+    /// <summary>
+    /// 屏幕截图
+    /// </summary>
+    private void RenderTextureLab()
+    {
+        RenderTexture renderTexture = RenderTexture.GetTemporary(100, 100, 0);
+        renderTexture.filterMode = FilterMode.Bilinear;
+        RenderTexture.active = renderTexture;
+        Camera camera = Camera.main;
+        camera.targetTexture = renderTexture;
+        camera.Render();
+        RawImage rawImage = transform.Find("RawImage").GetComponent<RawImage>();
+        rawImage.texture = renderTexture;
+        RenderTexture.active = null;
+        camera.targetTexture = null;
+        //RenderTexture.GetTemporary这个api要和RenderTexture.ReleaseTemporary 配套使用否则会内存泄漏
+        //RenderTexture.ReleaseTemporary(renderTexture);
     }
 
 
