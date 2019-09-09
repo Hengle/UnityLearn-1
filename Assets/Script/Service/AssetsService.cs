@@ -57,7 +57,6 @@ public class AssetsService : MonoBehaviour
         if (!string.IsNullOrEmpty(request.error))
         {
             Debug.LogError(request.error);
-
         }
         else
         {
@@ -67,6 +66,21 @@ public class AssetsService : MonoBehaviour
                 //写入本地
             }
         }
+    }
+
+
+    public IEnumerator DownText(string url, Action<string> action)
+    {
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        DownloadHandlerTexture handler = new DownloadHandlerTexture(true);
+        request.downloadHandler = handler;
+        yield return request.SendWebRequest();
+        if (string.IsNullOrEmpty(request.error))
+        {
+            action?.Invoke(handler.text);
+        }
+        request.Dispose();
+        handler.Dispose();
     }
 
     //public T LoadAssetAsyn<T>(string path) where T : UnityEngine.Object

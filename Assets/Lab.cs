@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using JsonObject;
+using SimpleJSON;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,22 +9,232 @@ using UnityEngine.UI;
 
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
+    private Student _student;
+
+    private void Awake()
+    {
+        _student = new Student();
+    }
 
     private void Start()
     {
+        string path = "http://192.168.1.243:8082/basketball/popup/Language.json";
+
+        //StartCoroutine(AssetsService.Instance.DownText(path, WriteAllLanguageInOneText));
+
+        StartCoroutine(AssetsService.Instance.DownText(path, WriteAllLanguageInTexts));
+
+
+
+        MessageManager.AddListener<string>(ActionName.TEST_1, Func1);
+
+        MessageManager.AddListener<string>(ActionName.TEST_1, Func2);
+
+
+    }
+
+    private void Func1(string name)
+    {
+        Debug.LogErrorFormat(name);
+    }
+
+
+    private void Func2(string name)
+    {
+        Debug.LogErrorFormat("Func2");
     }
 
     public void Update()
     {
-
         if (Input.GetMouseButtonDown(1))
         {
-            RenderTextureLab();
+            //重新load
+            //LuaService.Instance.LoadLuaScript();
+            //Play();
+
+
+            MessageManager.TriggerListener(ActionName.TEST_1, "123");
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            MessageManager.RemoveListtener<string>(ActionName.TEST_1, Func1);
+        }
+    }
+
+    private void Func()
+    {
+        Debug.LogError("this message is from Chsharp");
+    }
+
+
+
+    /// <summary>
+    /// 把所有的语言包按照模块名称写到多个
+    /// </summary>
+    /// <param name="json"></param>
+    private void WriteAllLanguageInTexts(string json)
+    {
+        Dictionary<string, string> languageDict = new Dictionary<string, string>();
+
+        var jsonArray = JSONNode.Parse(json);
+
+        foreach (KeyValuePair<string, JSONNode> temp in (JSONClass)jsonArray)
+        {
+            if (languageDict.ContainsKey(temp.Key))
+            {
+                Debug.LogWarning("Duplicate string: " + temp.Key);
+            }
+            else
+            {
+                languageDict.Add(temp.Key, temp.Value);
+            }
+        }
+
+        Debug.LogError("languageDict.Count:" + languageDict.Count);
+
+
+        var enumerator = languageDict.GetEnumerator();
+        var keyValuePairs = new Dictionary<string, Dictionary<string, string>>();
+
+        var content = string.Empty;
+        while (enumerator.MoveNext())
+        {
+            string key = enumerator.Current.Key;
+            string value = enumerator.Current.Value;
+            //业务模块名称
+            string moduleName = key.Substring(0, key.IndexOf("/") + 1);
+            moduleName = moduleName.Replace("/", "");
+            if (!keyValuePairs.ContainsKey(moduleName))
+            {
+                var temp = new Dictionary<string, string>();
+                keyValuePairs.Add(moduleName, temp);
+            }
+            keyValuePairs[moduleName].Add(key, value);
         }
 
 
-    
+        //写入本地
+        string localPath = @"C:\Users\admin\Desktop\Language";
+        int count = 0;
+        foreach (var item in keyValuePairs)
+        {
+            count += item.Value.Count;
+            Language language = new Language();
+            language.languageItems = new List<LanguageItem>();
+            foreach (var item1 in item.Value)
+            {
+                LanguageItem languageItem = new LanguageItem(item1.Key, item1.Value);
+                language.languageItems.Add(languageItem);
+            }
+
+            content = JsonUtility.ToJson(language, true);
+
+            string fileName = item.Key + ".json";
+            FileUtility.WriteTextToLaocal(localPath, fileName, content);
+        }
+        Debug.LogError("按照业务模块划分之后的：" + count);
+
     }
+
+    /// <summary>
+    /// 把所有的语言包写到一个文本中
+    /// </summary>
+    /// <param name="json"></param>
+    private void WriteAllLanguageInOneText(string json)
+    {
+        Dictionary<string, string> languageDict = new Dictionary<string, string>();
+
+        var jsonArray = JSONNode.Parse(json);
+
+        foreach (KeyValuePair<string, JSONNode> temp in (JSONClass)jsonArray)
+        {
+            if (languageDict.ContainsKey(temp.Key))
+            {
+                Debug.LogWarning("Duplicate string: " + temp.Key);
+            }
+            else
+            {
+                languageDict.Add(temp.Key, temp.Value);
+            }
+        }
+
+        Debug.LogError("languageDict.Count:" + languageDict.Count);
+
+
+        var enumerator = languageDict.GetEnumerator();
+        var keyValuePairs = new Dictionary<string, Dictionary<string, string>>();
+
+        var content = string.Empty;
+        while (enumerator.MoveNext())
+        {
+            string key = enumerator.Current.Key;
+            string value = enumerator.Current.Value;
+            //业务模块名称
+            string moduleName = key.Substring(0, key.IndexOf("/") + 1);
+            if (!keyValuePairs.ContainsKey(moduleName))
+            {
+                var temp = new Dictionary<string, string>();
+                keyValuePairs.Add(moduleName, temp);
+            }
+            keyValuePairs[moduleName].Add(key, value);
+        }
+        Root root = new Root();
+        root.languages = new List<Language>();
+        int count = 0;
+        foreach (var item in keyValuePairs)
+        {
+            count += item.Value.Count;
+            Language language = new Language();
+            language.languageItems = new List<LanguageItem>();
+            foreach (var item1 in item.Value)
+            {
+                LanguageItem languageItem = new LanguageItem(item1.Key, item1.Value);
+                language.languageItems.Add(languageItem);
+            }
+            root.languages.Add(language);
+            //continue;
+        }
+        Debug.LogError("按照业务模块划分之后的：" + count);
+
+        content = JsonUtility.ToJson(root, transform);
+
+        //写入本地
+        string localPath = @"C:\Users\admin\Desktop\Language";
+        string fileName = "NewLanguage.json";
+
+        FileUtility.WriteTextToLaocal(localPath, fileName, content);
+    }
+
+    [Serializable]
+    public class Root
+    {
+        public string ModelName;
+        public List<Language> languages;
+    }
+
+    [Serializable]
+    public class Language
+    {
+        public List<LanguageItem> languageItems;
+    }
+
+    [Serializable]
+    public class LanguageItem
+    {
+        public string Key;
+        public string Value;
+
+
+        public LanguageItem(string key, string value)
+        {
+            Key = key;
+            Value = value;
+        }
+    }
+
+
+
+
 
     [ContextMenu("Play")]
     private void Play()
@@ -67,7 +280,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.Log(1111);
     }
 
-    
+
     /// <summary>
     /// 屏幕截图
     /// </summary>
@@ -121,21 +334,25 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
             Debug.Log(list[i].ToString());
         }
     }
+}
+public class Student
+{
+    public int Age;
+    public int Height;
 
-    private class Student
+    public Student()
     {
-        public int Age;
-        public int Height;
 
-        public Student(int age, int height)
-        {
-            Age = age;
-            Height = height;
-        }
+    }
 
-        public override string ToString()
-        {
-            return ("Age:" + Age + " Height:" + Height);
-        }
+    public Student(int age, int height)
+    {
+        Age = age;
+        Height = height;
+    }
+
+    public override string ToString()
+    {
+        return ("Age:" + Age + " Height:" + Height);
     }
 }

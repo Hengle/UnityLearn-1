@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class MessageManager : MonoBehaviour
+public class NetManager : MonoBehaviour
 {
     private readonly string BASE_URL = "";
 

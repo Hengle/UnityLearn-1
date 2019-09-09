@@ -3,17 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class SaveData : MonoBehaviour
+public class FileUtility
 {
-
-
-    void Start()
-    {
-        string path = @"C:\Users\admin\Desktop";
-        WriteTextToLaocal(path, "图集的引用.txt", "123");
-    }
-
-
 
     /// <summary>
     /// 写入文本到本地
@@ -21,7 +12,7 @@ public class SaveData : MonoBehaviour
     /// <param name="path">文本的保存路径</param>
     /// <param name="fileName">文件的名字</param>
     /// <param name="content">写入内容</param>
-    private void WriteTextToLaocal(string path, string fileName, string content)
+    public static void WriteTextToLaocal(string path, string fileName, string content)
     {
         if (!Directory.Exists(path))
         {
