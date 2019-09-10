@@ -167,6 +167,21 @@ public class MessageManager : MonoBehaviour
             _mode.DelegateDict.Remove(actionName);
         }
     }
+
+    /// <summary>
+    /// 清理
+    /// </summary>
+    public static void Clear()
+    {
+        var enumerator = _mode.DelegateDict.GetEnumerator();
+        while (enumerator.MoveNext())
+        {
+            Delegate temp = enumerator.Current.Value;
+            temp = Delegate.RemoveAll(temp, temp);
+            temp = null;
+        }
+        _mode.DelegateDict.Clear();
+    }
 }
 
 public class MessageModel
