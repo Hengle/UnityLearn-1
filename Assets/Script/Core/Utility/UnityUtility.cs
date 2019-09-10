@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class UnityExtension
+public static class UnityUtility
 {
     /// <summary>
     /// 16进制颜色码转化为RGBA颜色值
@@ -15,7 +15,6 @@ public static class UnityExtension
         string hex = color.r.ToString("X2") + color.g.ToString("X2") + color.b.ToString("X2") + color.a.ToString("X2");
         return hex;
     }
-
 
     /// <summary>
     /// 16进制颜色码转化为RGBA颜色值
@@ -33,7 +32,6 @@ public static class UnityExtension
         ColorUtility.TryParseHtmlString(htmlString, out color);
         return color;
     }
-
 
     /// <summary>
     /// 
@@ -56,10 +54,8 @@ public static class UnityExtension
         return null;
     }
 
-
-
     /// <summary>
-    /// 随机打乱顺序
+    /// 随机打乱List顺序
     /// </summary>
     /// <param name="list"></param>
     /// <returns></returns>
@@ -74,10 +70,18 @@ public static class UnityExtension
         return newList;
     }
 
-    private static int Season(this DateTime dataTime)
+    /// <summary>
+    /// 返回UI在Canvas的绝对坐标
+    /// </summary>
+    /// <param name="canvas"></param>
+    /// <param name="transform"></param>
+    /// <returns></returns>
+    public static Vector2 GetUIPosRelativeCanvas(Canvas canvas, Transform transform)
     {
-
-        //dataTime.da
-        return 1;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, transform.position, canvas.GetComponent<Camera>(), out Vector2 pos))
+        {
+            return pos;
+        }
+        return pos;
     }
 }

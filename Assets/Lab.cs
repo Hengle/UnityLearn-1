@@ -30,8 +30,15 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
         MessageManager.AddListener<string>(ActionName.TEST_1, Func2);
 
-
+        Vector2 pos;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, image.transform.position, canvas.GetComponent<Camera>(), out pos))
+        {
+            Debug.Log(pos);
+        }
     }
+
+    public Canvas canvas;
+    public Transform image;
 
     private void Func1(string name)
     {
