@@ -22,23 +22,20 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
         //StartCoroutine(AssetsService.Instance.DownText(path, WriteAllLanguageInOneText));
 
-        StartCoroutine(AssetsService.Instance.DownText(path, WriteAllLanguageInTexts));
+        //StartCoroutine(AssetsService.Instance.DownText(path, WriteAllLanguageInTexts));
+
+        // MessageManager.AddListener<string>(ActionName.TEST_1, Func1);
+
+        // MessageManager.AddListener<string>(ActionName.TEST_1, Func2);
 
 
 
-        MessageManager.AddListener<string>(ActionName.TEST_1, Func1);
 
-        MessageManager.AddListener<string>(ActionName.TEST_1, Func2);
 
-        Vector2 pos;
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, image.transform.position, canvas.GetComponent<Camera>(), out pos))
-        {
-            Debug.Log(pos);
-        }
+
     }
 
-    public Canvas canvas;
-    public Transform image;
+
 
     private void Func1(string name)
     {
@@ -307,7 +304,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //RenderTexture.ReleaseTemporary(renderTexture);
     }
 
-
     /// <summary>
     /// 朗母达表达式排序
     /// </summary>
@@ -340,6 +336,23 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         {
             Debug.Log(list[i].ToString());
         }
+    }
+
+    /// <summary>
+    /// 向右操作运算符
+    /// 向左操作运算符
+    /// </summary>
+    private void OperatorTest()
+    {
+        int m = 8;
+        Debug.LogError(m >> 1);//十进制转化为二进制 8 = 1000 ，1向右边移动1位，0100，即4
+        Debug.LogError(m >> 2);//十进制转化为二进制 8 = 1000 ，1向右边移动2位，0010，即2
+        Debug.LogError(m >> 3);//十进制转化为二进制 8 = 1000 ，1向右边移动3位，0001，即1
+
+        int n = 2;
+        Debug.LogError(n << 1);//十进制转化为二进制 2 = 10 ，1向左边移动1位，100，即4
+        Debug.LogError(n << 2);//十进制转化为二进制 2 = 10 ，1向左边移动2位，1000，即8
+        Debug.LogError(n << 3);//十进制转化为二进制 2 = 10 ，1向左边移动3位，10000，即16
     }
 }
 public class Student

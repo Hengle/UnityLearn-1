@@ -188,7 +188,6 @@ public class MessageModel
 {
     public Dictionary<string, Delegate> DelegateDict;
 
-
     public MessageModel()
     {
         DelegateDict = new Dictionary<string, Delegate>();
