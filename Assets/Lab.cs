@@ -35,8 +35,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     }
 
-
-
     private void Func1(string name)
     {
         Debug.LogErrorFormat(name);
@@ -353,6 +351,13 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.LogError(n << 1);//十进制转化为二进制 2 = 10 ，1向左边移动1位，100，即4
         Debug.LogError(n << 2);//十进制转化为二进制 2 = 10 ，1向左边移动2位，1000，即8
         Debug.LogError(n << 3);//十进制转化为二进制 2 = 10 ，1向左边移动3位，10000，即16
+    }
+
+    private void Texture2DTest()
+    {
+        Texture2D texture2D = Resources.Load<Texture2D>("");
+        texture2D.GetPixel(1,1);   //返回坐标处的像素颜色
+        //可用于不规则的点击区域判断
     }
 }
 public class Student
