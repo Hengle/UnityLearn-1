@@ -1,16 +1,20 @@
 ﻿using System;
 using UnityEngine;
 using WebSocketSharp;
-
+using System.Text;
 public class WebSocketDemo : MonoBehaviour
 {
     private WebSocket _webSocket;
-    private const string URL = "";
+    private const string URL = "ws://123.207.167.163:9010/ajaxchattest";
 
     private void Awake()
     {
         Init();
         Connect();
+
+        string message = "123";
+        var bytes = Encoding.UTF8.GetBytes(message);
+        SendMessage(bytes);
     }
 
     private void Init()
@@ -45,6 +49,10 @@ public class WebSocketDemo : MonoBehaviour
     private void OnMessage(object sender, MessageEventArgs e)
     {
         //do something
+
+        Debug.LogError("OnMessage");
+        var message = Encoding.UTF8.GetString(e.RawData);
+        Debug.LogError(message);
     }
 
     /// <summary>

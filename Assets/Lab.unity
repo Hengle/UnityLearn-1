@@ -194,7 +194,6 @@ GameObject:
   - component: {fileID: 571315993}
   - component: {fileID: 571315995}
   - component: {fileID: 571315996}
-  - component: {fileID: 571315994}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: MainCamera
@@ -304,18 +303,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a8461a94771b9c4685035dea6f621f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &571315994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571315987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36f3a0bae80b85f4e81473a51ba89bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &571315995

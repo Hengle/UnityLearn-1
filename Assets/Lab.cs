@@ -3,6 +3,7 @@ using SimpleJSON;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,6 +11,8 @@ using UnityEngine.UI;
 
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
+
+    WebSocket webSocket;
     private Student _student;
 
     private void Awake()
@@ -19,20 +22,8 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
-        string path = "http://192.168.1.243:8082/basketball/popup/Language.json";
-
-
-
-        IPAddress[] ipAdress = Dns.GetHostAddresses("www.baidu.com");
-
-
-
-        for (int i = 0; i < ipAdress.Length; i++)
-        {
-            Debug.LogError(ipAdress[i].ToString());
-        }
-      
-
+        ServerSocket1 server = new ServerSocket1();
+        server.Listen();
     }
 
     private void Func1(string name)
