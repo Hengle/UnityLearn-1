@@ -2,6 +2,7 @@
 using SimpleJSON;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -20,18 +21,17 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     {
         string path = "http://192.168.1.243:8082/basketball/popup/Language.json";
 
-        //StartCoroutine(AssetsService.Instance.DownText(path, WriteAllLanguageInOneText));
 
-        //StartCoroutine(AssetsService.Instance.DownText(path, WriteAllLanguageInTexts));
 
-        // MessageManager.AddListener<string>(ActionName.TEST_1, Func1);
-
-        // MessageManager.AddListener<string>(ActionName.TEST_1, Func2);
+        IPAddress[] ipAdress = Dns.GetHostAddresses("www.baidu.com");
 
 
 
-
-
+        for (int i = 0; i < ipAdress.Length; i++)
+        {
+            Debug.LogError(ipAdress[i].ToString());
+        }
+      
 
     }
 
@@ -356,7 +356,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     private void Texture2DTest()
     {
         Texture2D texture2D = Resources.Load<Texture2D>("");
-        texture2D.GetPixel(1,1);   //返回坐标处的像素颜色
+        texture2D.GetPixel(1, 1);   //返回坐标处的像素颜色
         //可用于不规则的点击区域判断
     }
 }

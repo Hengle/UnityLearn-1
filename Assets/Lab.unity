@@ -193,10 +193,8 @@ GameObject:
   - component: {fileID: 571315992}
   - component: {fileID: 571315993}
   - component: {fileID: 571315995}
-  - component: {fileID: 571315994}
   - component: {fileID: 571315996}
-  - component: {fileID: 571315998}
-  - component: {fileID: 571315997}
+  - component: {fileID: 571315994}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: MainCamera
@@ -308,8 +306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8461a94771b9c4685035dea6f621f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  t: {fileID: 2800000, guid: 2b9d11ae541357c44b84bb3d9537bbb0, type: 3}
-  Color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &571315994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,7 +315,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 571315987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa34794f28708b46aac5e000accd9a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 36f3a0bae80b85f4e81473a51ba89bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &571315995
@@ -347,44 +343,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 1
---- !u!95 &571315997
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571315987}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!320 &571315998
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571315987}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 9a949a6189423054695d57ae5bed0695, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 114013574372296828, guid: 9a949a6189423054695d57ae5bed0695, type: 2}
-    value: {fileID: 571315997}
-  m_ExposedReferences:
-    m_References: []
 --- !u!1 &1287948990
 GameObject:
   m_ObjectHideFlags: 0
