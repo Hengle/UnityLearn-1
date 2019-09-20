@@ -7,9 +7,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+[ExecuteInEditMode]
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
+
+
 
     WebSocket webSocket;
     private Student _student;
@@ -17,6 +19,8 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
+
+        Debug.LogError("Awake");
         _student = new Student();
 
 
@@ -50,7 +54,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //text.text = "和发动机返回就发多少发多少 dksjjdklsdsdkol";
         //text.text = "和发动机返回就发多少发多少\u00A0dksjjdklsdsdkol";
 
-        text.text = textAsset.text.Replace("__", "\u3000\u3000");
+        //text.text = textAsset.text.Replace("__", "\u3000\u3000");
 
         //t.transform.localPosition = new Vector3(t.transform.localPosition.x + 1, t.transform.localPosition.y);
         //t.transform.localScale = Vector3.one * (curve.Evaluate(t.transform.localPosition.x) + 1);
@@ -68,8 +72,8 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         if (Input.GetMouseButtonDown(1))
         {
             //重新load
-            //LuaService.Instance.LoadLuaScript();
-            //Play();
+            LuaService.Instance.LoadLuaScript();
+            Play();
 
 
             MessageManager.TriggerListener(ActionName.TEST_1, "123");

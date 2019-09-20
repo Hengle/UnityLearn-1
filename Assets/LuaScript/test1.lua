@@ -1,0 +1,1 @@
+print("this test1 lua script")
