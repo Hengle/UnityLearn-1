@@ -41,12 +41,14 @@ public class AssetsService : MonoBehaviour
     }
 
 
-    IEnumerator DownAssetBundle<T>(string resName, string url) where T : UnityEngine.Object
+    public IEnumerator DownAssetBundle<T>(string resName, string url) where T : UnityEngine.Object
     {
-        UnityWebRequest unityWebRequest = UnityWebRequestAssetBundle.GetAssetBundle("url");
+        UnityWebRequest unityWebRequest = UnityWebRequestAssetBundle.GetAssetBundle(url);
         yield return unityWebRequest.SendWebRequest();
         AssetBundle assetBundle = (unityWebRequest.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
         T gameObject = assetBundle.LoadAsset<T>(resName);
+
+        GameObject.Instantiate(gameObject, Camera.main.transform);
     }
 
 

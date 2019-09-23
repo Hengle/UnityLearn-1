@@ -3,37 +3,25 @@ using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-[ExecuteInEditMode]
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
-
-
-
     WebSocket webSocket;
     private Student _student;
     public AnimationCurve curve;
 
     private void Awake()
     {
-
-        Debug.LogError("Awake");
         _student = new Student();
-
-
-        Debug.LogError(curve.Evaluate(1));
     }
-
-
     public Transform t;
 
     private void Start()
     {
-        ServerSocket1 server = new ServerSocket1();
-        server.Listen();
+        transform.Find("Bg").GetComponent<Image>().color = new Color(0, 9, 7, 164) / 255f;
+
     }
 
     private void Func1(string name)
@@ -47,8 +35,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.LogErrorFormat("Func2");
     }
 
-    public TextMeshPro text;
-    public TextAsset textAsset;
     public void Update()
     {
         //text.text = "和发动机返回就发多少发多少 dksjjdklsdsdkol";
@@ -71,12 +57,13 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
         if (Input.GetMouseButtonDown(1))
         {
-            //重新load
-            LuaService.Instance.LoadLuaScript();
-            Play();
+            //MessageManager.TriggerListener(ActionName.TEST_1, "123");
 
 
-            MessageManager.TriggerListener(ActionName.TEST_1, "123");
+            StartCoroutine(AssetsService.Instance.DownAssetBundle<GameObject>("cube", @"D:\wangzuxiong\UnityLearn\Assets\AssetBundles\cube"));
+
+            StartCoroutine(AssetsService.Instance.DownAssetBundle<GameObject>("cube1", @"D:\wangzuxiong\UnityLearn\Assets\AssetBundles\cube1"));
+
         }
         else if (Input.GetMouseButtonDown(0))
         {
@@ -84,10 +71,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         }
     }
 
-    private void Func()
-    {
-        Debug.LogError("this message is from Chsharp");
-    }
+
 
 
 
@@ -256,12 +240,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     }
 
     [ContextMenu("Play")]
-    private void Play()
-    {
-        Debug.Log("do lua ");
-        // do lua
-    }
-
 
     public async static void GetInfoAsync()
     {

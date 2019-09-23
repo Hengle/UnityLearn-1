@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Lab.unity
+    path: Assets/XLuaLearn/XLuaLearn.unity
     guid: 098d6b73743c42641bb2e0b784ec3606
   m_configObjects: {}
