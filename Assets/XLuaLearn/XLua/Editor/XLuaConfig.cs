@@ -40,6 +40,26 @@ public static class XLuaConfig
         }
     }
 
+    [LuaCallCSharp]
+    public static List<Type> ProtoBufList
+    {
+        get
+        {
+            List<Type> list = new List<Type>();
+            DirectoryInfo di = new DirectoryInfo(Application.dataPath);
+            string url = di.Parent.FullName + "/Library/ScriptAssemblies/Assembly-CSharp.dll";
+            Type[] arr = Assembly.LoadFile(url).GetTypes();
+            foreach (var type in arr)
+            {
+                if (type.Namespace.IndexOf("com.proto", StringComparison.Ordinal) != -1)
+                {
+                    list.Add(type);
+                }
+            }
+            return list;
+        }
+    }
+
     ////GoKit相关配置
     //[LuaCallCSharp]
     //[ReflectionUse]
