@@ -3,7 +3,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UGUIAdvance : MonoBehaviour {
+public class UGUIAdvance : MonoBehaviour
+{
 
     [MenuItem("GameObject/UI/Image")]
     static void CreatImage()
@@ -12,11 +13,11 @@ public class UGUIAdvance : MonoBehaviour {
         {
             if (Selection.activeTransform.GetComponentInParent<Canvas>())
             {
-                GameObject go = new GameObject("image", typeof(Image));
+                GameObject go = new GameObject("Image", typeof(Image));
                 go.GetComponent<Image>().raycastTarget = false;
                 go.transform.SetParent(Selection.activeTransform);
-                go.transform.localScale =Vector3.one;
-                go.transform.localPosition =Vector3.zero;
+                go.transform.localScale = Vector3.one;
+                go.transform.localPosition = Vector3.zero;
                 go.layer = Selection.activeTransform.gameObject.layer;
             }
         }
@@ -31,12 +32,11 @@ public class UGUIAdvance : MonoBehaviour {
             {
                 GameObject go = new GameObject("Text", typeof(Text));
                 Text text = go.GetComponent<Text>();
-                if (text !=null)
+                if (text != null)
                 {
-                    text.font = Resources.Load<Font>("Fonts/FZHTJW");
                     text.raycastTarget = false;
                 }
-             
+
                 go.transform.SetParent(Selection.activeTransform);
                 go.transform.localScale = Vector3.one;
                 go.transform.localPosition = Vector3.zero;
