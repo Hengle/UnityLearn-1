@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -11,17 +12,97 @@ public class LoadAssetBundle : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(DownAssetBundle<GameObject>(Name1, Path1));
-        StartCoroutine(DownAssetBundle<GameObject>(Name2, Path2));
+        StartCoroutine(DownAB<GameObject>(Name1, Path1));
+        StartCoroutine(DownAB<GameObject>(Name2, Path2));
     }
 
-    private IEnumerator DownAssetBundle<T>(string resName, string url) where T : Object
+    /// <summary>
+    /// 远程下载
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="resName"></param>
+    /// <param name="url"></param>
+    /// <returns></returns>
+    private IEnumerator DownAB<T>(string resName, string url) where T : Object
     {
         UnityWebRequest unityWebRequest = UnityWebRequestAssetBundle.GetAssetBundle(url);
         yield return unityWebRequest.SendWebRequest();
+        //AssetBundle assetBundle = DownloadHandlerAssetBundle.GetContent(unityWebRequest);
         AssetBundle assetBundle = (unityWebRequest.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
         Debug.LogError(assetBundle == null);
         T gameObject = assetBundle.LoadAsset<T>(resName);
         Instantiate(gameObject, Camera.main.transform);
+    }
+
+    /// <summary>
+    /// WWW.LoadFromCacheOrDownload
+    /// </summary>
+    /// <returns></returns>
+    [System.Obsolete]
+    private IEnumerator LoadCacheOrDownloadFromFile()
+    {
+        while (Caching.ready == false)
+        {
+            yield return null;
+        }
+        WWW www = WWW.LoadFromCacheOrDownload(Path1, 1);
+        yield return www;
+
+        if (!string.IsNullOrEmpty(www.error))
+        {
+            Debug.Log(www.error);
+            yield break;
+        }
+        AssetBundle ab = www.assetBundle;
+        GameObject go = ab.LoadAsset<GameObject>(Name1);
+        Instantiate(go);
+    }
+
+    /// <summary>
+    /// 二进制文件  同步加载
+    /// </summary>
+    private void LoadBinaryAB()
+    {
+        var binary = File.ReadAllBytes(Path1);
+        var ab = AssetBundle.LoadFromMemory(binary);
+        var go = ab.LoadAsset<GameObject>(Name1);
+        Instantiate(go);
+    }
+
+    /// <summary>
+    /// 二进制文件 异步加载
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator LoadBinaryABAsync()
+    {
+        var binary = File.ReadAllBytes(Path1);
+        AssetBundleCreateRequest request = AssetBundle.LoadFromMemoryAsync(binary);
+        yield return request;
+        AssetBundle ab = request.assetBundle;
+        GameObject cube = ab.LoadAsset<GameObject>(Name1);
+        Instantiate(cube);
+    }
+
+    /// <summary>
+    /// 从文件进行加载 同步
+    /// </summary>
+    private void LoadFileAB()
+    {
+        AssetBundle ab = AssetBundle.LoadFromFile(Path1);
+        GameObject go = ab.LoadAsset<GameObject>(Name1);
+        Instantiate(go);
+    }
+
+    /// <summary>
+    /// 从文件进行加载 异步
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator LoadFileABAsync()
+    {
+        AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(Path1);
+        yield return request;
+        AssetBundle ab = request.assetBundle;
+        GameObject go = ab.LoadAsset<GameObject>(Name1);
+        Instantiate(go);
     }
 }
