@@ -105,4 +105,19 @@ public class LoadAssetBundle : MonoBehaviour
         GameObject go = ab.LoadAsset<GameObject>(Name1);
         Instantiate(go);
     }
+
+
+    /// <summary>
+    /// 读取Manifest文件，获取它们的依赖关系并且加载出来
+    /// </summary>
+    private void Func()
+    {
+        AssetBundle manifestAB = AssetBundle.LoadFromFile("AssetBundles/AssetBundles");
+        AssetBundleManifest manifest = manifestAB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+        string[] strArr = manifest.GetAllDependencies("scene/cubewall.ab");
+        foreach (var item in strArr)
+        {
+            AssetBundle.LoadFromFile("AssetBundles/" + item);
+        }
+    }
 }
