@@ -23,7 +23,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         transform.Find("Bg").GetComponent<Image>().color = new Color(0, 9, 7, 164) / 255f;
 
     }
-
+    
     private void Func1(string name)
     {
         Debug.LogErrorFormat(name);
