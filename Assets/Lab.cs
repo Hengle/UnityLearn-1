@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+[ExecuteInEditMode]
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
     WebSocket webSocket;
@@ -20,10 +21,9 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
-        transform.Find("Bg").GetComponent<Image>().color = new Color(0, 9, 7, 164) / 255f;
 
     }
-    
+
     private void Func1(string name)
     {
         Debug.LogErrorFormat(name);
@@ -37,33 +37,9 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     public void Update()
     {
-        //text.text = "和发动机返回就发多少发多少 dksjjdklsdsdkol";
-        //text.text = "和发动机返回就发多少发多少\u00A0dksjjdklsdsdkol";
-
-        //text.text = textAsset.text.Replace("__", "\u3000\u3000");
-
-        //t.transform.localPosition = new Vector3(t.transform.localPosition.x + 1, t.transform.localPosition.y);
-        //t.transform.localScale = Vector3.one * (curve.Evaluate(t.transform.localPosition.x) + 1);
-
-        //t.transform.Translate(Vector3.right * 1 * Time.deltaTime);
-
-
-        //if (Time.frameCount % 10 == 0)
-        //{
-        //    Debug.Log("Log");
-        //    Debug.LogWarning("LogWarning");
-        //    Debug.LogError("LogError");
-        //}
-
         if (Input.GetMouseButtonDown(1))
         {
-            //MessageManager.TriggerListener(ActionName.TEST_1, "123");
-
-
-            StartCoroutine(AssetsService.Instance.DownAssetBundle<GameObject>("cube", @"D:\wangzuxiong\UnityLearn\Assets\AssetBundles\cube"));
-
-            StartCoroutine(AssetsService.Instance.DownAssetBundle<GameObject>("cube1", @"D:\wangzuxiong\UnityLearn\Assets\AssetBundles\cube1"));
-
+            LongmudaSort();
         }
         else if (Input.GetMouseButtonDown(0))
         {
@@ -300,7 +276,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     /// <summary>
     /// 朗母达表达式排序
     /// </summary>
-    private void LongmudaLab()
+    private void LongmudaSort()
     {
         var list = new List<Student>
             {
@@ -314,17 +290,25 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
             Debug.Log(list[i].ToString());
         }
 
+        Debug.LogError("==============");
+
         //按照年龄排序
         //如果年龄一致的话则按照身高排序
-        list.Sort((item1, item2) =>
-        {
-            if (item1.Age == item2.Age)
-            {
-                return item1.Height.CompareTo(item2.Height);
-            }
-            return item1.Age.CompareTo(item2.Age);
-        });
 
+        //list.Sort((item1, item2) =>
+        //{
+        //    if (item1.Age == item2.Age)
+        //    {
+        //        return item1.Height.CompareTo(item2.Height);
+        //    }
+        //    return item1.Age.CompareTo(item2.Age);
+        //});
+
+        //权重大的排前面
+        list.Sort((item1, item2) => item1.Age.CompareTo(item2.Age) * 2 + item1.Height.CompareTo(item2.Height));
+
+
+        //list.AddRange(new List<Student>());
         for (int i = 0; i < list.Count; i++)
         {
             Debug.Log(list[i].ToString());
