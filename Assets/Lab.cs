@@ -35,11 +35,30 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.LogErrorFormat("Func2");
     }
 
+
+    public Transform Earth;
+    public Transform MainCamera;
+    public float R;
+
+
+    public float X;
+
     public void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            LongmudaSort();
+            //LongmudaSort();
+
+            //向量
+            Vector3 temp = Earth.position - MainCamera.position;
+
+
+
+
+
+
+
+
         }
         else if (Input.GetMouseButtonDown(0))
         {
